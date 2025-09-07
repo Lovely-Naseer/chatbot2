@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aptitude Chatbot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f7fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+    h2 {
+      margin: 20px 0;
+      color: #2c3e50;
+    }
+    #chat {
+      border: 1px solid #ccc;
+      background: #ffffff;
+      border-radius: 10px;
+      width: 70%;
+      max-width: 800px;
+      height: 500px;
+      padding: 15px;
+      overflow-y: auto;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+    .msg {
+      margin: 10px 0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      line-height: 1.4;
+      max-width: 75%;
+      word-wrap: break-word;
+    }
+    .user {
+      background: #d1ecf1;
+      color: #0c5460;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+    .bot {
+      background: #d4edda;
+      color: #155724;
+      align-self: flex-start;
+      margin-right: auto;
+    }
+    form {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      width: 70%;
+      max-width: 800px;
+    }
+    input[type="text"], input[type="file"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      flex: 1;
+      font-size: 14px;
+    }
+    button {
+      padding: 10px 18px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .msg button {
+      margin-left: 8px;
+      padding: 3px 8px;
+      font-size: 12px;
+      background: #ffcc00;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .msg button:hover {
+      background: #e6b800;
+    }
+  </style>
+</head>
+<body>
+  <h2>Aptitude Chatbot</h2>
+  <div id="quota-status" style="background:#222;color:#fff;padding:8px;border-radius:8px;margin-bottom:10px;">
+  <b>API Quota:</b> <span id="quota-usage">0</span>/<span id="quota-limit">50</span>  
+  (Key <span id="quota-key">0</span> of <span id="quota-total">0</span>)
+</div>
+  <div id="chat"></div>
+
+  <form id="askForm">
+    <input type="text" id="question" placeholder="Enter your question" />
+    <input type="file" id="image" />
+    <button type="submit">Ask</button>
+  </form>
+
+  <script>
+    const chatDiv = document.getElementById("chat");
+    const form = document.getElementById("askForm");
+    const questionInput = document.getElementById("question");
+    const imageInput = document.getElementById("image");
+
+    function addMessage(text, who="bot", allowModify=false) {
+      const div = document.createElement("div");
+      div.className = "msg " + who;
+      div.innerHTML = text;
+      chatDiv.appendChild(div);
+
+      if (allowModify) {
+        const btn = document.createElement("button");
+        btn.textContent = "Modify";
+        btn.onclick = () => modifyAnswer(text);
+        div.appendChild(btn);
+      }
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const q = questionInput.value.trim();
+      const img = imageInput.files[0];
+
+      if (!q && !img) {
+        alert("Enter a question or upload an image.");
+        return;
+      }
+      addMessage("<b>You:</b> " + (q || "[Image]"), "user");
+
+      const fd = new FormData();
+      fd.append("question", q);
+      if (img) fd.append("image", img);
+
+      // clear inputs after submit
+      questionInput.value = "";
+      imageInput.value = "";
+
+      addMessage("Thinking...", "bot");
+
+      const resp = await fetch("/ask", { method: "POST", body: fd });
+      const data = await resp.json();
+      chatDiv.lastChild.remove();
+      if (data.reply) addMessage(data.reply, "bot", true);
+      else addMessage("Error: " + data.error, "bot");
+    };
+    async function refreshStatus() {
+    try {
+      const resp = await fetch("/_status");
+      const data = await resp.json();
+      document.getElementById("statusBar").innerHTML = `
+        <b>Current API Key:</b> ${data.current_key} 
+        | <b>Index:</b> ${data.current_key_index + 1}/${data.total_keys} 
+        | <b>Usage:</b> ${data.usage}/${data.limit}
+        ${data.last_error ? "<br><span style='color:red'>Last Error: " + data.last_error + "</span>" : ""}
+      `;
+    } catch (err) {
+      document.getElementById("statusBar").textContent = "Status unavailable.";
+      }
+   }
+
+
+    async function modifyAnswer(originalText) {
+      const feedback = prompt("Tell me what's wrong (leave blank for default):");
+      if (feedback === null) return;
+
+      addMessage("Modifying...", "bot");
+      const fd = new FormData();
+      fd.append("assistant_text", originalText);
+      fd.append("feedback", feedback);
+
+      try {
+        const resp = await fetch("/modify", { method: "POST", body: fd });
+        const raw = await resp.text();
+
+        let data;
+        try { data = JSON.parse(raw); }
+        catch { chatDiv.lastChild.remove(); addMessage("Server error:\n" + raw, "bot"); return; }
+
+        chatDiv.lastChild.remove();
+        if (resp.ok && data.reply) addMessage(data.reply, "bot", true);
+        else addMessage("Error: " + (data.error || JSON.stringify(data)), "bot");
+      } catch (err) {
+        chatDiv.lastChild.remove();
+        addMessage("Request failed: " + err, "bot");
+      }
+    }
+  </script>
+  <script>
+  async function fetchStatus() {
+    try {
+      const res = await fetch("/_status");
+      const data = await res.json();
+      document.getElementById("quota-usage").innerText = data.usage;
+      document.getElementById("quota-limit").innerText = data.limit;
+      document.getElementById("quota-key").innerText = data.current_key_index + 1;
+      document.getElementById("quota-total").innerText = data.total_keys;
+    } catch (err) {
+      console.error("Error fetching status:", err);
+    }
+  }
+
+  // Refresh every 5 seconds
+  fetchStatus();
+  setInterval(fetchStatus, 5000);
+</script>
+</body>
+</html>

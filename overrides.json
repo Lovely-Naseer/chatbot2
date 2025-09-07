@@ -1,0 +1,37 @@
+{
+  "what is the total number of prime factors in the expression 1212 x 1616 x 1818 a 46 b 154 c 3456 d 2": {
+    "raw": "1) Formula used: Prime factorization and exponent sum\n2) Process: 1212 = 2² x 3 x 101; 1616 = 2⁴ x 101; 1818 = 2 x 3² x 101.  Total prime factors: 2(2+4+1) + 1(1+2) + 101(1+1+1) = 14 + 3 + 303 = 154\n3) Final Answer: ✅ 154",
+    "html": "<p>1) Formula used: Prime factorization and exponent sum\n2) Process: 1212 = 2² x 3 x 101; 1616 = 2⁴ x 101; 1818 = 2 x 3² x 101.  Total prime factors: 2(2+4+1) + 1(1+2) + 101(1+1+1) = 14 + 3 + 303 = 154\n3) Final Answer: ✅ 154</p>",
+    "modified_by": "27c438faa68e79eb",
+    "modified_at": "2025-09-06T14:45:34.871258Z",
+    "feedback": "154 is the answer"
+  },
+  "what should be assigned to so that 2582724 is divisible by 11 a 4 b 5 c 6 d 7": {
+    "raw": "1) Formula used: Divisibility rule of 11 (Difference between the sum of digits at odd places and the sum of digits at even places is divisible by 11)\n2) Process: Sum of odd digits = 2+8+#+2 = 12+# ; Sum of even digits = 5+2+7+4 = 18 ; 18-(12+#) = 0 or multiple of 11.  6 - # = 0 or 11. # = 6 or -5. Since # is a single digit, #=6.\n3) Final Answer: ✅ 6 (C)",
+    "html": "<p>1) Formula used: Divisibility rule of 11 (Difference between the sum of digits at odd places and the sum of digits at even places is divisible by 11)\n2) Process: Sum of odd digits = 2+8+#+2 = 12+# ; Sum of even digits = 5+2+7+4 = 18 ; 18-(12+#) = 0 or multiple of 11.  6 - # = 0 or 11. # = 6 or -5. Since # is a single digit, #=6.\n3) Final Answer: ✅ 6 (C)</p>",
+    "modified_by": "27c438faa68e79eb",
+    "modified_at": "2025-09-06T14:47:11.970472Z",
+    "feedback": "For a number to be divisible by 11, the difference of the sum of numbers at even and odd places should be either 0 or a multiple of 11. We assume the leftmost digit at position 1. So, Sum of numbers at even places = 5 + 2 + 7 + 4 = 18 Sum of numbers at odd places = 2 + 8 + # + 2 = 12 + #   Now, to make the number divisible by 11, we equate the sums obtained in the above step. 18 = 12 + # => # = 6 Therefore, C (6) is the correct choice. answer is 6"
+  },
+  "what is the smallest number which when divided by 6 9 11 16 and 22 leaves remainder 3 in each case a 3267 b 1584 c 1587 d 9504": {
+    "raw": "[Gemini Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 36\n}\n]]",
+    "html": "<p>[Gemini Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 36\n}\n]]</p>",
+    "modified_by": "27c438faa68e79eb",
+    "modified_at": "2025-09-06T15:33:26.091623Z",
+    "feedback": "LCM (6,9,11,16,22) = 1584 The required number = 1584 + 3 = 1587"
+  },
+  "find the values of a b c and d in the below expression 2a x 3b x 5c x 11d 720 a 2410 b 4210 c 4211 d 3221": {
+    "raw": "[Gemini Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 53\n}\n]]",
+    "html": "<p>[Gemini Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 53\n}\n]]</p>",
+    "modified_by": "27c438faa68e79eb",
+    "modified_at": "2025-09-06T15:37:09.339267Z",
+    "feedback": ""
+  },
+  "the least perfect square which is divisible by each of 21 36 and 66 is 213444 214344 214434 231444": {
+    "raw": "[Gemini Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 37\n}\n]]",
+    "html": "<p>[Gemini Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 50\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 37\n}\n]]</p>",
+    "modified_by": "41706f72e3fbd918",
+    "modified_at": "2025-09-07T06:44:22.993751Z",
+    "feedback": "correct answer give"
+  }
+}
